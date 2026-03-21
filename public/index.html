@@ -331,12 +331,13 @@ function showSummary(){
       <div class="summary-actions">
         <button class="summary-btn" onclick="loadSection(0)">最初に戻る</button>
         <button class="summary-btn primary" onclick="copyAll()">テキストをコピー</button>
-        <button class="summary-btn primary" onclick="window.print()">PDF保存</button>
-        <button class="summary-btn green" onclick="openEmailModal()">メールで受け取る</button>
+        <button class="summary-btn green" onclick="openFormPreview()">創業計画書を開く（印刷用）</button>
+        <button class="summary-btn" onclick="openEmailModal()">メールで受け取る</button>
       </div>
     </div>`;
 }
-
+function saveToStorage(){try{localStorage.setItem('sougyou_answers',JSON.stringify(answers));}catch(e){}}
+function openFormPreview(){saveToStorage();window.open('/keikakusho.html','_blank');}
 function copyAll(){
   const text=SECTIONS.map(s=>`【${s.name}】\n${answers[s.id]||'（未入力）'}`).join('\n\n');
   navigator.clipboard.writeText(text).then(()=>alert('コピーしました。')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('コピーしました。');});
