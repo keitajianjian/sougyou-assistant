@@ -3,176 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>創業計画書アシスタント｜開業融資サポート</title>
+<title>創業計画書アシスタント</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink: #1a1814;
-  --ink-mid: #4a4640;
-  --ink-light: #8a8680;
-  --paper: #faf8f4;
-  --paper-warm: #f2ede4;
-  --paper-dark: #e8e0d0;
-  --accent: #2d5a3d;
-  --accent-light: #e8f0ea;
-  --accent-mid: #4a8a5e;
-  --border: rgba(26,24,20,0.12);
-  --gold: #b8960c;
-  --gold-light: #faf3d8;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Noto Sans JP', sans-serif;
-  background: var(--paper);
-  color: var(--ink);
-  min-height: 100vh;
-  font-weight: 300;
-}
-
-/* Header */
-.header {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 14px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.header-brand { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 600; letter-spacing: 0.05em; }
-.header-sub { font-size: 11px; opacity: 0.5; letter-spacing: 0.08em; margin-top: 2px; }
-.header-badge { font-size: 10px; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 2px; opacity: 0.7; letter-spacing: 0.06em; }
-
-/* Layout */
-.layout { display: grid; grid-template-columns: 240px 1fr; height: calc(100vh - 52px); }
-
-/* Sidebar */
-.sidebar { background: var(--paper-warm); border-right: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; }
-.sidebar-inner { padding: 16px 0; flex: 1; }
-.sidebar-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); padding: 0 16px; margin-bottom: 6px; margin-top: 16px; }
-.sidebar-label:first-child { margin-top: 0; }
-.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; cursor: pointer; transition: background 0.15s; border-left: 2px solid transparent; }
-.nav-item:hover { background: var(--paper-dark); }
-.nav-item.active { background: white; border-left-color: var(--accent); }
-.nav-item.done .nav-num { background: var(--accent); color: white; border-color: var(--accent); }
-.nav-num { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; flex-shrink: 0; color: var(--ink-light); transition: all 0.2s; }
-.nav-name { font-size: 12px; color: var(--ink-mid); line-height: 1.3; }
-.nav-item.active .nav-name { color: var(--ink); font-weight: 500; }
-.progress-wrap { padding: 14px 16px; border-top: 1px solid var(--border); }
-.progress-label { font-size: 10px; color: var(--ink-light); letter-spacing: 0.06em; margin-bottom: 6px; display: flex; justify-content: space-between; }
-.progress-track { height: 3px; background: var(--paper-dark); border-radius: 2px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(--accent); transition: width 0.5s ease; }
-
-/* Main */
-.main { display: flex; flex-direction: column; overflow: hidden; }
-.section-header { padding: 18px 24px 14px; border-bottom: 1px solid var(--border); background: white; }
-.section-eyebrow { font-size: 10px; letter-spacing: 0.1em; color: var(--ink-light); text-transform: uppercase; margin-bottom: 4px; }
-.section-title { font-family: 'Noto Serif JP', serif; font-size: 17px; font-weight: 600; color: var(--ink); }
-.section-hint { font-size: 12px; color: var(--ink-light); margin-top: 4px; line-height: 1.6; }
-
-/* Chat */
-.chat-wrap { flex: 1; overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
-.msg-row { display: flex; gap: 10px; align-items: flex-start; animation: fadeUp 0.25s ease; }
-@keyframes fadeUp { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
-.msg-row.user { flex-direction: row-reverse; }
-.avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
-.av-ai { background: var(--ink); color: var(--paper); font-family: 'Noto Serif JP', serif; }
-.av-user { background: var(--accent-light); color: var(--accent); }
-.bubble { max-width: 74%; padding: 11px 15px; font-size: 13.5px; line-height: 1.75; color: var(--ink); }
-.bubble.ai { background: white; border: 1px solid var(--border); border-radius: 2px 12px 12px 12px; box-shadow: 0 1px 4px rgba(26,24,20,0.04); }
-.bubble.user { background: var(--accent); color: white; border-radius: 12px 2px 12px 12px; }
-.bubble.typing { color: var(--ink-light); font-style: italic; }
-
-/* Result */
-.result-card { margin: 0 24px 12px; padding: 12px 16px; background: var(--accent-light); border: 1px solid rgba(45,90,61,0.2); border-radius: 6px; display: none; }
-.result-card.show { display: block; }
-.result-card-label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 5px; }
-.result-card-text { font-size: 13px; color: var(--ink); line-height: 1.7; }
-.result-edit-btn { margin-top: 6px; font-size: 11px; color: var(--accent-mid); cursor: pointer; text-decoration: underline; background: none; border: none; padding: 0; font-family: inherit; }
-
-/* Quick chips */
-.quick-wrap { padding: 0 24px 10px; display: flex; gap: 6px; flex-wrap: wrap; }
-.quick-chip { font-size: 11.5px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; background: white; color: var(--ink-mid); cursor: pointer; transition: all 0.15s; font-family: inherit; }
-.quick-chip:hover { background: var(--paper-dark); }
-
-/* Input */
-.input-bar { padding: 12px 24px 14px; border-top: 1px solid var(--border); background: white; display: flex; gap: 10px; align-items: flex-end; }
-.input-field { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; font-size: 13.5px; font-family: inherit; font-weight: 300; resize: none; min-height: 40px; max-height: 120px; background: var(--paper); color: var(--ink); line-height: 1.5; transition: border-color 0.15s; }
-.input-field:focus { outline: none; border-color: var(--accent); }
-.input-field::placeholder { color: var(--ink-light); }
-.send-btn { padding: 10px 18px; background: var(--accent); color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; transition: background 0.15s; height: 40px; white-space: nowrap; }
-.send-btn:hover { background: #1e4029; }
-.send-btn:disabled { background: var(--paper-dark); color: var(--ink-light); cursor: not-allowed; }
-
-/* Nav btns */
-.nav-btns { padding: 10px 24px; display: flex; gap: 8px; background: var(--paper-warm); border-top: 1px solid var(--border); }
-.nav-btn { flex: 1; padding: 9px; font-size: 12px; font-weight: 500; border: 1px solid var(--border); border-radius: 4px; background: white; color: var(--ink-mid); cursor: pointer; font-family: inherit; transition: all 0.15s; }
-.nav-btn:hover:not(:disabled) { background: var(--paper-dark); }
-.nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.nav-btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.nav-btn.primary:hover { background: #2d2b28; }
-
-/* Summary */
-.summary-wrap { padding: 24px; overflow-y: auto; flex: 1; }
-.summary-sec { margin-bottom: 18px; }
-.summary-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 5px; }
-.summary-value { font-size: 13px; color: var(--ink); line-height: 1.7; background: white; border: 1px solid var(--border); border-radius: 4px; padding: 10px 14px; }
-.summary-empty { color: var(--ink-light); font-style: italic; }
-.summary-actions { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
-.summary-btn { flex: 1; min-width: 120px; padding: 10px; font-size: 13px; font-weight: 500; border: 1px solid var(--border); border-radius: 4px; background: white; color: var(--ink-mid); cursor: pointer; font-family: inherit; transition: all 0.15s; text-align: center; }
-.summary-btn:hover { background: var(--paper-dark); }
-.summary-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
-
-/* Welcome screen */
-.welcome { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
-.welcome-card { max-width: 480px; text-align: center; }
-.welcome-icon { font-family: 'Noto Serif JP', serif; font-size: 36px; font-weight: 600; color: var(--accent); margin-bottom: 16px; }
-.welcome-title { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 600; margin-bottom: 10px; }
-.welcome-desc { font-size: 13.5px; color: var(--ink-mid); line-height: 1.8; margin-bottom: 24px; }
-.welcome-points { text-align: left; background: var(--paper-warm); border-radius: 8px; padding: 16px 20px; margin-bottom: 24px; }
-.welcome-point { font-size: 13px; color: var(--ink-mid); line-height: 1.7; padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; }
-.welcome-point:last-child { border-bottom: none; }
-.wp-check { color: var(--accent); font-weight: 500; flex-shrink: 0; }
-.start-btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 6px; font-size: 15px; font-weight: 500; font-family: inherit; cursor: pointer; transition: background 0.15s; letter-spacing: 0.05em; }
-.start-btn:hover { background: #1e4029; }
-.welcome-note { font-size: 11px; color: var(--ink-light); margin-top: 12px; line-height: 1.6; }
-
-@media (max-width: 640px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
-  .bubble { max-width: 88%; }
-  .chat-wrap { padding: 16px; }
-  .input-bar { padding: 10px 16px 12px; }
-  .nav-btns { padding: 8px 16px; }
-}
+:root{--ink:#1a1814;--ink-mid:#4a4640;--ink-light:#8a8680;--paper:#faf8f4;--paper-warm:#f2ede4;--paper-dark:#e8e0d0;--accent:#2d5a3d;--accent-light:#e8f0ea;--accent-mid:#4a8a5e;--border:rgba(26,24,20,0.12);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;font-weight:300;}
+.header{background:var(--ink);color:var(--paper);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
+.header-brand{font-family:'Noto Serif JP',serif;font-size:14px;font-weight:600;letter-spacing:.05em;}
+.header-sub{font-size:10px;opacity:.5;margin-top:2px;}
+.header-badge{font-size:10px;padding:3px 8px;border:1px solid rgba(255,255,255,.2);border-radius:2px;opacity:.7;}
+.layout{display:grid;grid-template-columns:220px 1fr;height:calc(100vh - 48px);}
+.sidebar{background:var(--paper-warm);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column;}
+.sidebar-inner{padding:12px 0;flex:1;}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;transition:background .15s;border-left:2px solid transparent;}
+.nav-item:hover{background:var(--paper-dark);}
+.nav-item.active{background:white;border-left-color:var(--accent);}
+.nav-item.done .nav-num{background:var(--accent);color:white;border-color:var(--accent);}
+.nav-num{width:20px;height:20px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;color:var(--ink-light);transition:all .2s;}
+.nav-name{font-size:11px;color:var(--ink-mid);line-height:1.3;}
+.nav-item.active .nav-name{color:var(--ink);font-weight:500;}
+.progress-wrap{padding:12px 14px;border-top:1px solid var(--border);}
+.progress-label{font-size:10px;color:var(--ink-light);margin-bottom:6px;display:flex;justify-content:space-between;}
+.progress-track{height:3px;background:var(--paper-dark);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);transition:width .5s ease;}
+.main{display:flex;flex-direction:column;overflow:hidden;}
+.section-header{padding:16px 20px 12px;border-bottom:1px solid var(--border);background:white;}
+.section-eyebrow{font-size:10px;letter-spacing:.1em;color:var(--ink-light);text-transform:uppercase;margin-bottom:3px;}
+.section-title{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:600;}
+.section-hint{font-size:11px;color:var(--ink-light);margin-top:3px;line-height:1.5;}
+.chat-wrap{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px;}
+.msg-row{display:flex;gap:8px;align-items:flex-start;animation:fadeUp .25s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.msg-row.user{flex-direction:row-reverse;}
+.avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;}
+.av-ai{background:var(--ink);color:var(--paper);font-family:'Noto Serif JP',serif;}
+.av-user{background:var(--accent-light);color:var(--accent);}
+.bubble{max-width:76%;padding:10px 14px;font-size:13px;line-height:1.75;}
+.bubble.ai{background:white;border:1px solid var(--border);border-radius:2px 10px 10px 10px;box-shadow:0 1px 3px rgba(26,24,20,.04);}
+.bubble.user{background:var(--accent);color:white;border-radius:10px 2px 10px 10px;}
+.bubble.typing{color:var(--ink-light);font-style:italic;}
+.result-card{margin:0 20px 10px;padding:10px 14px;background:var(--accent-light);border:1px solid rgba(45,90,61,.2);border-radius:6px;display:none;}
+.result-card.show{display:block;}
+.result-card-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:4px;}
+.result-card-text{font-size:12.5px;color:var(--ink);line-height:1.7;}
+.result-edit-btn{margin-top:5px;font-size:11px;color:var(--accent-mid);cursor:pointer;text-decoration:underline;background:none;border:none;padding:0;font-family:inherit;}
+.quick-wrap{padding:0 20px 8px;display:flex;gap:5px;flex-wrap:wrap;}
+.quick-chip{font-size:11px;padding:4px 10px;border:1px solid var(--border);border-radius:20px;background:white;color:var(--ink-mid);cursor:pointer;transition:all .15s;font-family:inherit;}
+.quick-chip:hover{background:var(--paper-dark);}
+.input-bar{padding:10px 20px 12px;border-top:1px solid var(--border);background:white;display:flex;gap:8px;align-items:flex-end;}
+.input-field{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:inherit;font-weight:300;resize:none;min-height:38px;max-height:100px;background:var(--paper);color:var(--ink);line-height:1.5;transition:border-color .15s;}
+.input-field:focus{outline:none;border-color:var(--accent);}
+.input-field::placeholder{color:var(--ink-light);}
+.send-btn{padding:9px 16px;background:var(--accent);color:white;border:none;border-radius:6px;font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;height:38px;white-space:nowrap;transition:background .15s;}
+.send-btn:hover{background:#1e4029;}
+.send-btn:disabled{background:var(--paper-dark);color:var(--ink-light);cursor:not-allowed;}
+.nav-btns{padding:8px 20px;display:flex;gap:8px;background:var(--paper-warm);border-top:1px solid var(--border);}
+.nav-btn{flex:1;padding:8px;font-size:12px;font-weight:500;border:1px solid var(--border);border-radius:4px;background:white;color:var(--ink-mid);cursor:pointer;font-family:inherit;transition:all .15s;}
+.nav-btn:hover:not(:disabled){background:var(--paper-dark);}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed;}
+.nav-btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.nav-btn.primary:hover{background:#2d2b28;}
+.summary-wrap{padding:20px;overflow-y:auto;flex:1;}
+.summary-sec{margin-bottom:14px;}
+.summary-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:4px;}
+.summary-value{font-size:13px;color:var(--ink);line-height:1.7;background:white;border:1px solid var(--border);border-radius:4px;padding:10px 14px;}
+.summary-empty{color:var(--ink-light);font-style:italic;}
+.summary-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+.summary-btn{flex:1;min-width:100px;padding:10px;font-size:12px;font-weight:500;border:1px solid var(--border);border-radius:4px;background:white;color:var(--ink-mid);cursor:pointer;font-family:inherit;transition:all .15s;text-align:center;}
+.summary-btn:hover{background:var(--paper-dark);}
+.summary-btn.primary{background:var(--ink);color:white;border-color:var(--ink);}
+.summary-btn.green{background:var(--accent);color:white;border-color:var(--accent);}
+.modal-overlay{position:fixed;inset:0;background:rgba(26,24,20,.5);display:flex;align-items:center;justify-content:center;z-index:100;}
+.modal-overlay.hide{display:none;}
+.modal{background:var(--paper);border-radius:8px;padding:28px;max-width:400px;width:90%;}
+.modal-title{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:600;margin-bottom:8px;}
+.modal-desc{font-size:12px;color:var(--ink-mid);line-height:1.7;margin-bottom:16px;}
+.modal-input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:4px;font-size:13px;font-family:inherit;background:white;color:var(--ink);margin-bottom:10px;}
+.modal-input:focus{outline:none;border-color:var(--accent);}
+.modal-btns{display:flex;gap:8px;}
+.modal-btn{flex:1;padding:10px;font-size:13px;font-weight:500;border-radius:4px;cursor:pointer;font-family:inherit;border:1px solid var(--border);background:white;color:var(--ink-mid);}
+.modal-btn.primary{background:var(--accent);color:white;border-color:var(--accent);}
+.welcome{flex:1;display:flex;align-items:center;justify-content:center;padding:32px 20px;overflow-y:auto;}
+.welcome-card{max-width:460px;width:100%;text-align:center;}
+.welcome-icon{font-family:'Noto Serif JP',serif;font-size:32px;font-weight:600;color:var(--accent);margin-bottom:14px;}
+.welcome-title{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:600;margin-bottom:8px;}
+.welcome-desc{font-size:13px;color:var(--ink-mid);line-height:1.8;margin-bottom:20px;}
+.welcome-points{text-align:left;background:var(--paper-warm);border-radius:8px;padding:14px 18px;margin-bottom:20px;}
+.welcome-point{font-size:12.5px;color:var(--ink-mid);line-height:1.7;padding:3px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;}
+.welcome-point:last-child{border-bottom:none;}
+.wp-check{color:var(--accent);font-weight:500;flex-shrink:0;}
+.start-btn{width:100%;padding:13px;background:var(--accent);color:white;border:none;border-radius:6px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;letter-spacing:.05em;}
+.start-btn:hover{background:#1e4029;}
+.welcome-note{font-size:11px;color:var(--ink-light);margin-top:10px;line-height:1.6;}
+@media print{.header,.sidebar,.nav-btns,.summary-actions{display:none!important;}.layout{display:block;height:auto;}.main{overflow:visible;}.summary-wrap{padding:0;}body{background:white;}}
+@media(max-width:640px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.bubble{max-width:90%;}.chat-wrap,.input-bar,.nav-btns,.section-header{padding:12px 14px;}.result-card,.quick-wrap{margin-left:14px;margin-right:14px;padding-left:0;padding-right:0;}}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div>
-    <div class="header-brand">創業計画書アシスタント</div>
-    <div class="header-sub">元銀行員・FP監修 AI</div>
+<div class="modal-overlay hide" id="email-modal">
+  <div class="modal">
+    <div class="modal-title">メールで受け取る</div>
+    <div class="modal-desc">入力内容をメールで送信します。メールアドレスを入力してください。</div>
+    <input class="modal-input" type="email" id="email-input" placeholder="example@email.com"/>
+    <div class="modal-btns">
+      <button class="modal-btn" onclick="closeEmailModal()">キャンセル</button>
+      <button class="modal-btn primary" onclick="sendEmail()">送信する</button>
+    </div>
   </div>
+</div>
+<div class="header">
+  <div><div class="header-brand">創業計画書アシスタント</div><div class="header-sub">元銀行員・FP監修 AI</div></div>
   <div class="header-badge">日本政策金融公庫 対応</div>
 </div>
-
 <div class="layout">
   <div class="sidebar">
-    <div class="sidebar-inner">
-      <div class="sidebar-label">入力セクション</div>
-      <div id="nav-list"></div>
-    </div>
+    <div class="sidebar-inner" id="nav-list"></div>
     <div class="progress-wrap">
-      <div class="progress-label">
-        <span>入力進捗</span>
-        <span id="prog-text">0 / 9</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="prog-fill" style="width:0%"></div>
-      </div>
+      <div class="progress-label"><span>入力進捗</span><span id="prog-text">0 / 9</span></div>
+      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
     </div>
   </div>
-
   <div class="main" id="main-area">
-    <!-- Welcome screen shown first -->
     <div class="section-header">
       <div class="section-eyebrow">ようこそ</div>
       <div class="section-title">創業計画書を一緒に作りましょう</div>
@@ -182,164 +134,78 @@ body {
       <div class="welcome-card">
         <div class="welcome-icon">創</div>
         <div class="welcome-title">はじめての方へ</div>
-        <div class="welcome-desc">このツールはAIが質問を投げかけ、あなたが答えるだけで日本政策金融公庫の創業計画書を完成させます。難しい書き方は不要です。</div>
+        <div class="welcome-desc">AIが質問するのに答えるだけで、日本政策金融公庫の創業計画書が完成します。難しい書き方の知識は不要です。</div>
         <div class="welcome-points">
-          <div class="welcome-point"><span class="wp-check">✓</span><span>全9セクションをAIと会話形式で入力</span></div>
-          <div class="welcome-point"><span class="wp-check">✓</span><span>元銀行員・FP監修の審査に強い表現に整理</span></div>
-          <div class="welcome-point"><span class="wp-check">✓</span><span>途中で止めても内容は保持されます</span></div>
-          <div class="welcome-point"><span class="wp-check">✓</span><span>完成後は内容をコピーして窓口に提出</span></div>
+          <div class="welcome-point"><span class="wp-check">✓</span><span>全9セクションをAIとの会話で入力</span></div>
+          <div class="welcome-point"><span class="wp-check">✓</span><span>審査に通りやすい表現にAIが整理</span></div>
+          <div class="welcome-point"><span class="wp-check">✓</span><span>完成後はPDF保存・メール送信が可能</span></div>
+          <div class="welcome-point"><span class="wp-check">✓</span><span>スマホでも快適に使えます</span></div>
         </div>
         <button class="start-btn" onclick="startSession()">入力を開始する</button>
-        <div class="welcome-note">所要時間の目安：15〜30分程度<br>途中で止めても、ブラウザを閉じなければ再開できます</div>
+        <div class="welcome-note">所要時間の目安：10〜20分程度</div>
       </div>
     </div>
   </div>
 </div>
-
 <script>
-const SECTIONS = [
-  {
-    id: 'motivation', name: '創業の動機',
-    hint: 'なぜこの事業を始めようと思ったか整理します',
-    system: `あなたは日本政策金融公庫の創業計画書「１．創業の動機」欄を作成するサポーターです。元銀行員・FP監修のアシスタントです。
+const SECTIONS=[
+{id:'motivation',name:'創業の動機',hint:'事業を始める理由・目的を整理します',intro:'まず「創業の動機」から始めましょう。\n\nどんな事業を始めようとしていますか？業種と、始めようと思ったきっかけを簡単に教えてください。',system:`あなたは日本政策金融公庫の創業計画書「１．創業の動機」欄の作成を手伝うAIアシスタントです。
 
-役割：ユーザーから創業の動機・背景を引き出し、融資審査担当者が「稟議を通しやすい」表現に整理し、最終的に記入できる文章（150〜250文字）を提案する。
+ルール：質問は1つずつ。2〜3回のやり取りで完結。審査に強い動機文（150〜200文字）を提案したら「この内容でよろしいですか？」と確認する。
 
-会話の流れ：
-①まず事業内容と動機を聞く
-②深掘りして審査に強い表現に仕上げる
-③文章が固まったら「以下の内容でいかがでしょうか？」と確認を取る
+審査で強い動機：前職での具体的な経験・課題が含まれている、誰の何の問題をどう解決するかが明確、数字や具体的な事実がある。
 
-審査で強い動機の書き方：前職での具体的な経験や課題を盛り込む、「誰の、どんな問題を、どう解決するか」を明確にする、数字や具体的な事実を入れる。
+重要：特定の職業や状況を前提にしない。フラットに誰にでも使える質問をする。
 
-返答は日本語で200文字以内。親しみやすいトーンで。`,
-    quick: ['銀行員経験を活かしたい', '困っている人を助けたい', '独立して自由に働きたい']
-  },
-  {
-    id: 'career', name: '経営者の略歴',
-    hint: '職歴・資格を審査担当者に伝わる形で整理します',
-    system: `あなたは創業計画書「２．経営者の略歴等」欄を作成するサポーターです。
+返答は200文字以内。`,quick:['飲食店を開きたい','IT・Webサービス','小売・物販','コンサル・士業']},
+{id:'career',name:'経営者の略歴',hint:'職歴・資格を審査に強い形で整理します',intro:'「経営者の略歴」を整理しましょう。\n\n直近のお仕事（会社名・担当業務・期間）を教えてください。',system:`あなたは創業計画書「２．経営者の略歴等」欄の作成を手伝うAIアシスタントです。
 
-確認事項：①勤務歴（年月・会社名・担当業務・役職）②資格・免許③過去の事業経験の有無
+ルール：質問は1つずつ。2〜3回で完結。記入できる略歴を提案して確認を取る。
 
-ポイント：職歴は「会社名」だけでなく「担当業務・身につけたスキル」を入れる。資格は種類と番号も。今回の事業に関連する経験を強調する。
+確認事項（1つずつ）：①直近の職歴②保有資格③今回の事業に関連するアピールポイント
 
-流れ：銀行等の勤務歴→資格確認→過去の事業経験確認→記入内容を提案。
+ポイント：会社名だけでなく何をしていたか・何を身につけたかを入れる。今回の事業に関連するスキルを強調する。
 
-返答は日本語で200文字以内。`,
-    quick: ['地方銀行に勤務', '融資審査を担当', 'FP資格保有']
-  },
-  {
-    id: 'service', name: '取扱商品・サービス',
-    hint: 'サービス内容と強みを具体的に整理します',
-    system: `あなたは創業計画書「３．取扱商品・サービス」欄を作成するサポーターです。
+返答は200文字以内。`,quick:['会社員（事務・営業）','専門職・技術職','飲食・サービス業','自営業経験あり']},
+{id:'service',name:'取扱商品・サービス',hint:'サービス内容・強み・ターゲットを整理します',intro:'「取扱商品・サービス」を整理します。\n\n提供するサービスや商品を教えてください。「何を・誰に・いくらで」提供するか簡単に。',system:`あなたは創業計画書「３．取扱商品・サービス」欄の作成を手伝うAIアシスタントです。
 
-確認事項：①取り扱うサービス・商品（1〜3つ）と売上シェア②セールスポイント（自社の強み）③販売ターゲットと集客方法④客単価
+ルール：質問は1つずつ。2〜3回で完結。記入内容を提案して確認を取る。
 
-ポイント：「誰に・何を・いくらで・どうやって」を明確に。競合との差別化ポイントを具体的に。
+確認事項（1つずつ）：①サービス・商品の内容と売上シェア②セールスポイント③販売ターゲットと集客方法
 
-返答は日本語で200文字以内。`,
-    quick: ['開業融資コンサル', '月次顧問サービス', 'オンライン相談']
-  },
-  {
-    id: 'employee', name: '従業員',
-    hint: '創業時の人員構成を確認します',
-    system: `あなたは創業計画書「４．従業員」欄を作成するサポーターです。
+返答は200文字以内。`,quick:['飲食・食品','IT・デジタル','美容・健康','コンサル・教育']},
+{id:'employee',name:'従業員',hint:'創業時の人員構成を確認します',intro:'「従業員」の確認です。\n\n創業時の従業員構成を教えてください。（例：自分1人、家族1名など）',system:`あなたは創業計画書「４．従業員」欄の作成を手伝うAIアシスタントです。
 
-確認事項：①常勤役員数（法人の場合）②従業員数（3ヶ月以上継続雇用予定）③うち家族従業員数④うちパート従業員数
+常勤役員数・従業員数・家族従業員数・パート数を1〜2回で確認し、記入内容を提案して確認する。
 
-1人での開業も多いので自然に対応してください。シンプルに確認して記入内容を提案。
+返答は150文字以内。`,quick:['自分1人','家族従業員あり','パート採用予定','スタッフ採用予定']},
+{id:'clients',name:'取引先・取引関係',hint:'販売先・仕入先などを整理します',intro:'「取引先・取引関係」を確認します。\n\nメインのお客様はどんな方ですか？個人・法人・業種など教えてください。',system:`あなたは創業計画書「５．取引先・取引関係等」欄の作成を手伝うAIアシスタントです。
 
-返答は日本語で150文字以内。`,
-    quick: ['自分1人のみ', '家族従業員あり', 'パート採用予定']
-  },
-  {
-    id: 'clients', name: '取引先・取引関係',
-    hint: '販売先・仕入先などを整理します',
-    system: `あなたは創業計画書「５．取引先・取引関係等」欄を作成するサポーターです。
+販売先・仕入先・外注先を1〜2回で確認し、記入内容を提案して確認する。サービス業は仕入先がないケースが多いことを踏まえて対応する。
 
-確認事項：①販売先（どんな顧客か・所在地・シェア）②仕入先・外注先（あれば）③掛取引の有無と回収条件
-
-コンサルティング・サービス業は仕入先がないケースが多いことを踏まえて確認。
-
-返答は日本語で150文字以内。`,
-    quick: ['個人・中小企業が顧客', '仕入先なし', '現金回収']
-  },
-  {
-    id: 'related', name: '関連企業',
-    hint: '代表者が経営する他の企業があれば記載します',
-    system: `あなたは創業計画書「６．関連企業」欄を作成するサポーターです。
-
-関連企業（申込人または配偶者が経営する企業）があるか確認し、ある場合は企業名・代表者名・所在地・業種を聞く。ない場合は「記入不要です」と伝える。
-
-返答は日本語で100文字以内。`,
-    quick: ['関連企業なし', '個人事業を継続中', '別法人あり']
-  },
-  {
-    id: 'debt', name: 'お借入の状況',
-    hint: '現在の借入状況を確認します（審査に直結する重要項目）',
-    system: `あなたは創業計画書「７．お借入の状況」欄を作成するサポーターです。
-
-確認事項：①借入先名と使いみち（住宅・車・教育・事業・カード等）②借入残高と年間返済額
-
-重要：借入があっても必ずしも審査に不利ではないことを伝える。正確に記載することが信頼につながる。プレッシャーをかけず優しく確認する。
-
-返答は日本語で150文字以内。`,
-    quick: ['借入なし', '住宅ローンあり', 'カーローンあり']
-  },
-  {
-    id: 'funds', name: '必要な資金と調達方法',
-    hint: '開業に必要な資金と調達方法を整理します',
-    system: `あなたは創業計画書「８．必要な資金と調達方法」欄を作成するサポーターです。
-
-確認事項：①設備資金（PC・機器・内装等）の金額と見積先②運転資金（何ヶ月分か）③調達方法（自己資金額・公庫借入希望額・親族借入等）
-
-アドバイス：自己資金は開業費の3分の1が目安だがケースバイケース。物的担保があれば地銀も選択肢。
-
-返答は日本語で200文字以内。`,
-    quick: ['設備費30〜50万', '自己資金100万以上', '公庫から100〜300万希望']
-  },
-  {
-    id: 'forecast', name: '事業の見通し',
-    hint: '月次の売上・経費・利益の見込みを数字で整理します',
-    system: `あなたは創業計画書「９．事業の見通し（月平均）」欄を作成するサポーターです。
-
-確認事項：①創業当初の月平均売上と根拠②1年後の月平均売上と根拠③主な経費（人件費・家賃・その他）④売上原価
-
-重要：売上予測には必ず根拠が必要。「何人×何回×いくら」という計算を一緒に作る。利益が出る計画になっているか確認する。
-
-返答は日本語で200文字以内。`,
-    quick: ['月商30万から', '月商50〜100万目標', '経費は最小限']
-  }
+返答は150文字以内。`,quick:['個人のお客様','法人・企業','個人と法人両方','仕入先なし']},
+{id:'related',name:'関連企業',hint:'代表者が経営する他の企業があれば記載します',intro:'「関連企業」の確認です。\n\nご自身または配偶者の方が現在経営している別の企業はありますか？',system:`あなたは創業計画書「６．関連企業」欄の作成を手伝うAIアシスタントです。関連企業の有無を確認する。ない場合は「記入不要です」と伝える。返答は100文字以内。`,quick:['関連企業なし','別の事業あり']},
+{id:'debt',name:'お借入の状況',hint:'現在の借入状況を確認します',intro:'「お借入の状況」です。\n\n現在、住宅ローン・カーローン等の借入はありますか？（なければ「なし」でOK）',system:`あなたは創業計画書「７．お借入の状況」欄の作成を手伝うAIアシスタントです。借入の有無と内容を確認する。借入があっても必ずしも審査に不利ではないことを伝える。プレッシャーをかけない。返答は150文字以内。`,quick:['借入なし','住宅ローンあり','カーローンあり','その他借入あり']},
+{id:'funds',name:'必要な資金と調達方法',hint:'開業資金の総額と調達方法を整理します',intro:'「必要な資金と調達方法」を整理します。\n\n開業に必要な資金の総額と主な使いみちを教えてください。',system:`あなたは創業計画書「８．必要な資金と調達方法」欄の作成を手伝うAIアシスタントです。設備資金・運転資金・調達方法を2〜3回で確認し、記入内容を提案して確認する。返答は200文字以内。`,quick:['設備費が必要','運転資金のみ','自己資金で賄える','融資を希望']},
+{id:'forecast',name:'事業の見通し',hint:'月次の売上・経費・利益の見込みを整理します',intro:'最後のセクションです。「事業の見通し」を整理します。\n\n創業当初の月平均売上の目標と、その根拠を教えてください。',system:`あなたは創業計画書「９．事業の見通し（月平均）」欄の作成を手伝うAIアシスタントです。創業当初・1年後の売上と経費を2〜3回で確認し、記入内容を提案して確認する。売上予測には根拠が必要。「何人×何回×いくら」の計算を一緒に作る。返答は200文字以内。`,quick:['月商30万円から','月商50〜100万円','月商100万円以上','まだ不明']}
 ];
 
-let currentIdx = 0;
-let answers = {};
-let histories = {};
-let isLoading = false;
-let sessionStarted = false;
+let currentIdx=0,answers={},histories={},isLoading=false;
 
-function startSession() {
-  sessionStarted = true;
-  buildNav();
-  loadSection(0);
-}
+function startSession(){buildNav();loadSection(0);}
 
-function buildNav() {
-  const list = document.getElementById('nav-list');
-  list.innerHTML = SECTIONS.map((s, i) => `
+function buildNav(){
+  document.getElementById('nav-list').innerHTML=SECTIONS.map((s,i)=>`
     <div class="nav-item" id="nav-${i}" onclick="loadSection(${i})">
       <div class="nav-num" id="navnum-${i}">${i+1}</div>
       <div class="nav-name">${s.name}</div>
     </div>`).join('');
 }
 
-function loadSection(idx) {
-  currentIdx = idx;
-  const sec = SECTIONS[idx];
-
-  const main = document.getElementById('main-area');
-  main.innerHTML = `
+function loadSection(idx){
+  currentIdx=idx;
+  const sec=SECTIONS[idx];
+  document.getElementById('main-area').innerHTML=`
     <div class="section-header">
       <div class="section-eyebrow">セクション ${idx+1} / ${SECTIONS.length}</div>
       <div class="section-title">${sec.name}</div>
@@ -355,182 +221,139 @@ function loadSection(idx) {
     <div class="input-bar">
       <textarea class="input-field" id="user-input" placeholder="ここに入力してください..." rows="1"
         onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
-      <button class="send-btn" id="send-btn" onclick="sendMessage()">送 信</button>
+      <button class="send-btn" id="send-btn" onclick="sendMessage()">送信</button>
     </div>
     <div class="nav-btns">
       <button class="nav-btn" id="prev-btn" onclick="navigate(-1)" ${idx===0?'disabled':''}>← 前へ</button>
       <button class="nav-btn" onclick="navigate(1)">後で入力</button>
       <button class="nav-btn primary" onclick="navigate(1)">${idx===SECTIONS.length-1?'確認画面へ →':'次へ →'}</button>
     </div>`;
-
-  document.querySelectorAll('.nav-item').forEach((el,i) => {
-    el.classList.toggle('active', i===idx);
-  });
-
-  if (!histories[idx]) {
-    histories[idx] = [];
-    const intro = getIntro(idx);
-    addBubble('ai', intro);
-    histories[idx].push({ role: 'assistant', content: intro });
+  document.querySelectorAll('.nav-item').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  if(!histories[idx]){
+    histories[idx]=[];
+    addBubble('ai',sec.intro);
+    histories[idx].push({role:'assistant',content:sec.intro});
   } else {
-    histories[idx].forEach(m => addBubble(m.role==='assistant'?'ai':'user', m.content, false));
+    histories[idx].forEach(m=>addBubble(m.role==='assistant'?'ai':'user',m.content,false));
   }
-
-  if (answers[sec.id]) {
+  if(answers[sec.id]){
     document.getElementById('result-card').classList.add('show');
-    document.getElementById('result-text').textContent = answers[sec.id];
+    document.getElementById('result-text').textContent=answers[sec.id];
   }
-
-  buildQuickChips(sec.quick);
+  document.getElementById('quick-wrap').innerHTML=sec.quick.map(c=>
+    `<button class="quick-chip" onclick="useQuick('${c}')">${c}</button>`).join('');
   document.getElementById('user-input').focus();
   updateProgress();
 }
 
-function getIntro(idx) {
-  return [
-    'こんにちは！創業計画書を一緒に作っていきましょう。\n\nまず「創業の動機」から始めます。どんな事業を始めようとしていますか？',
-    '次は「経営者の略歴」です。\n\n銀行などでの勤務歴（期間・会社名・担当業務）を教えてください。',
-    '「取扱商品・サービス」を整理しましょう。\n\n提供するサービスや商品を教えてください。（1〜3つ程度）',
-    '「従業員」の確認です。\n\n創業時の従業員構成を教えてください。（自分1人、家族あり、採用予定など）',
-    '「取引先・取引関係」です。\n\nメインのお客様（販売先）はどんな方ですか？',
-    '「関連企業」の確認です。\n\nご自身または配偶者が経営している別の企業はありますか？',
-    '「お借入の状況」です。審査に直結する大切な項目です。\n\n現在、住宅ローン・カーローン等の借入はありますか？（なければ「なし」でOK）',
-    '「必要な資金と調達方法」を整理します。\n\n開業に必要な資金の総額と主な使いみちを教えてください。',
-    'いよいよ最後です！「事業の見通し」です。\n\n創業当初の月平均売上の目標と、その根拠を教えてください。'
-  ][idx];
-}
+function useQuick(t){document.getElementById('user-input').value=t;sendMessage();}
 
-function buildQuickChips(chips) {
-  document.getElementById('quick-wrap').innerHTML = chips.map(c =>
-    `<button class="quick-chip" onclick="useQuick('${c}')">${c}</button>`
-  ).join('');
-}
-
-function useQuick(text) {
-  document.getElementById('user-input').value = text;
-  sendMessage();
-}
-
-function addBubble(role, text, animate=true) {
-  const wrap = document.getElementById('chat-wrap');
-  const div = document.createElement('div');
-  div.className = `msg-row ${role==='user'?'user':''}`;
-  if (!animate) div.style.animation = 'none';
-  div.innerHTML = `
-    <div class="avatar ${role==='ai'?'av-ai':'av-user'}">${role==='ai'?'AI':'あ'}</div>
-    <div class="bubble ${role==='ai'?'ai':'user'}">${text.replace(/\n/g,'<br>')}</div>`;
+function addBubble(role,text,animate=true){
+  const wrap=document.getElementById('chat-wrap');
+  if(!wrap)return null;
+  const div=document.createElement('div');
+  div.className=`msg-row ${role==='user'?'user':''}`;
+  if(!animate)div.style.animation='none';
+  div.innerHTML=`<div class="avatar ${role==='ai'?'av-ai':'av-user'}">${role==='ai'?'AI':'あ'}</div><div class="bubble ${role==='ai'?'ai':'user'}">${text.replace(/\n/g,'<br>')}</div>`;
   wrap.appendChild(div);
-  wrap.scrollTop = wrap.scrollHeight;
+  wrap.scrollTop=wrap.scrollHeight;
   return div;
 }
 
-async function sendMessage() {
-  if (isLoading) return;
-  const input = document.getElementById('user-input');
-  const text = input.value.trim();
-  if (!text) return;
-
-  input.value = '';
-  addBubble('user', text);
-  histories[currentIdx].push({ role: 'user', content: text });
-
-  isLoading = true;
-  document.getElementById('send-btn').disabled = true;
-
-  const typingDiv = addBubble('ai', '入力中…');
-  typingDiv.querySelector('.bubble').classList.add('typing');
-
-  try {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        messages: histories[currentIdx].map(m => ({ role: m.role, content: m.content })),
-        systemPrompt: SECTIONS[currentIdx].system
-      })
-    });
-
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'API error');
-
-    const reply = data.text;
-    typingDiv.remove();
-    addBubble('ai', reply);
-    histories[currentIdx].push({ role: 'assistant', content: reply });
-
-    if (reply.includes('いかがでしょうか') || reply.includes('確定') || reply.includes('まとめると') || reply.includes('以下の内容')) {
-      const userTexts = histories[currentIdx].filter(m=>m.role==='user').map(m=>m.content).join('。');
-      const sec = SECTIONS[currentIdx];
-      answers[sec.id] = userTexts;
-      document.getElementById('result-card').classList.add('show');
-      document.getElementById('result-text').textContent = userTexts;
-      const navNum = document.getElementById(`navnum-${currentIdx}`);
-      if (navNum) { navNum.style.background = 'var(--accent)'; navNum.style.color = 'white'; navNum.style.borderColor = 'var(--accent)'; }
+async function sendMessage(){
+  if(isLoading)return;
+  const input=document.getElementById('user-input');
+  const text=input.value.trim();
+  if(!text)return;
+  input.value='';
+  addBubble('user',text);
+  histories[currentIdx].push({role:'user',content:text});
+  isLoading=true;
+  document.getElementById('send-btn').disabled=true;
+  const td=addBubble('ai','入力中…');
+  if(td)td.querySelector('.bubble').classList.add('typing');
+  try{
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:histories[currentIdx].map(m=>({role:m.role,content:m.content})),systemPrompt:SECTIONS[currentIdx].system})});
+    const data=await res.json();
+    if(!res.ok)throw new Error(data.error||'API error');
+    const reply=data.text;
+    if(td)td.remove();
+    addBubble('ai',reply);
+    histories[currentIdx].push({role:'assistant',content:reply});
+    if(['いかがでしょうか','よろしいですか','この内容で','まとめると','以下の内容','確定'].some(w=>reply.includes(w))){
+      const ut=histories[currentIdx].filter(m=>m.role==='user').map(m=>m.content).join('。');
+      answers[SECTIONS[currentIdx].id]=ut;
+      const rc=document.getElementById('result-card');
+      const rt=document.getElementById('result-text');
+      if(rc&&rt){rc.classList.add('show');rt.textContent=ut;}
+      const nn=document.getElementById(`navnum-${currentIdx}`);
+      if(nn){nn.style.background='var(--accent)';nn.style.color='white';nn.style.borderColor='var(--accent)';}
       document.getElementById(`nav-${currentIdx}`)?.classList.add('done');
       updateProgress();
     }
-  } catch(e) {
-    typingDiv.remove();
-    addBubble('ai', 'エラーが発生しました。しばらく待ってから再度お試しください。');
-  }
-
-  isLoading = false;
-  document.getElementById('send-btn').disabled = false;
+  }catch(e){if(td)td.remove();addBubble('ai','エラーが発生しました。しばらく待ってから再度お試しください。');}
+  isLoading=false;
+  const sb=document.getElementById('send-btn');
+  if(sb)sb.disabled=false;
 }
 
-function editResult() {
-  const sec = SECTIONS[currentIdx];
-  delete answers[sec.id];
+function editResult(){
+  delete answers[SECTIONS[currentIdx].id];
   document.getElementById('result-card').classList.remove('show');
-  addBubble('ai', 'どの部分を修正しますか？');
-  histories[currentIdx].push({ role: 'assistant', content: 'どの部分を修正しますか？' });
+  addBubble('ai','どの部分を修正しますか？');
+  histories[currentIdx].push({role:'assistant',content:'どの部分を修正しますか？'});
 }
 
-function navigate(dir) {
-  const next = currentIdx + dir;
-  if (next < 0) return;
-  if (next >= SECTIONS.length) { showSummary(); return; }
+function navigate(dir){
+  const next=currentIdx+dir;
+  if(next<0)return;
+  if(next>=SECTIONS.length){showSummary();return;}
   loadSection(next);
 }
 
-function updateProgress() {
-  const done = Object.keys(answers).length;
-  document.getElementById('prog-text').textContent = `${done} / ${SECTIONS.length}`;
-  document.getElementById('prog-fill').style.width = `${Math.round(done/SECTIONS.length*100)}%`;
+function updateProgress(){
+  const done=Object.keys(answers).length;
+  const pt=document.getElementById('prog-text');
+  const pf=document.getElementById('prog-fill');
+  if(pt)pt.textContent=`${done} / ${SECTIONS.length}`;
+  if(pf)pf.style.width=`${Math.round(done/SECTIONS.length*100)}%`;
 }
 
-function showSummary() {
-  const main = document.getElementById('main-area');
-  main.innerHTML = `
+function showSummary(){
+  document.getElementById('main-area').innerHTML=`
     <div class="section-header">
       <div class="section-eyebrow">完了</div>
       <div class="section-title">入力内容の確認</div>
-      <div class="section-hint">全セクションの内容を確認してください。修正がある場合は左のメニューから戻れます。</div>
+      <div class="section-hint">内容を確認してください。修正は左メニューから各セクションに戻れます。</div>
     </div>
     <div class="summary-wrap">
-      ${SECTIONS.map(s=>`
-        <div class="summary-sec">
-          <div class="summary-label">${s.name}</div>
-          <div class="summary-value ${answers[s.id]?'':'summary-empty'}">
-            ${answers[s.id]?answers[s.id].replace(/\n/g,'<br>'):'（未入力）'}
-          </div>
-        </div>`).join('')}
+      ${SECTIONS.map(s=>`<div class="summary-sec"><div class="summary-label">${s.name}</div><div class="summary-value ${answers[s.id]?'':'summary-empty'}">${answers[s.id]?answers[s.id].replace(/\n/g,'<br>'):'（未入力）'}</div></div>`).join('')}
       <div class="summary-actions">
         <button class="summary-btn" onclick="loadSection(0)">最初に戻る</button>
-        <button class="summary-btn primary" onclick="copyAll()">内容をコピーする</button>
+        <button class="summary-btn primary" onclick="copyAll()">テキストをコピー</button>
+        <button class="summary-btn primary" onclick="window.print()">PDF保存</button>
+        <button class="summary-btn green" onclick="openEmailModal()">メールで受け取る</button>
       </div>
     </div>`;
 }
 
-function copyAll() {
-  const text = SECTIONS.map(s=>`【${s.name}】\n${answers[s.id]||'（未入力）'}`).join('\n\n');
-  navigator.clipboard.writeText(text).then(()=>{
-    alert('クリップボードにコピーしました。\n公庫の申請書類に貼り付けてご利用ください。');
-  }).catch(()=>{
-    const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-    alert('コピーしました。');
-  });
+function copyAll(){
+  const text=SECTIONS.map(s=>`【${s.name}】\n${answers[s.id]||'（未入力）'}`).join('\n\n');
+  navigator.clipboard.writeText(text).then(()=>alert('コピーしました。')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('コピーしました。');});
+}
+
+function openEmailModal(){document.getElementById('email-modal').classList.remove('hide');}
+function closeEmailModal(){document.getElementById('email-modal').classList.add('hide');}
+
+async function sendEmail(){
+  const email=document.getElementById('email-input').value.trim();
+  if(!email||!email.includes('@')){alert('正しいメールアドレスを入力してください。');return;}
+  const text=SECTIONS.map(s=>`【${s.name}】\n${answers[s.id]||'（未入力）'}`).join('\n\n');
+  try{
+    const res=await fetch('/api/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,content:text})});
+    if(res.ok){alert('送信しました！メールをご確認ください。');closeEmailModal();}
+    else{alert('送信に失敗しました。テキストをコピーしてご利用ください。');closeEmailModal();copyAll();}
+  }catch(e){alert('送信に失敗しました。テキストをコピーしてご利用ください。');closeEmailModal();copyAll();}
 }
 </script>
 </body>
