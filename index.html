@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>創業計画書</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;font-size:10px;color:#000;background:#fff;font-weight:400;}
+
+/* 印刷時のみ表示される */
+.print-only{display:none;}
+@media print{
+  .print-only{display:block;}
+  .no-print{display:none!important;}
+  body{font-size:9px;}
+  .page{width:297mm;min-height:210mm;padding:8mm 10mm;margin:0;box-shadow:none;}
+  @page{size:A3 landscape;margin:0;}
+}
+
+.page{width:297mm;min-height:210mm;padding:8mm 10mm;margin:0 auto;background:#fff;box-shadow:0 2px 20px rgba(0,0,0,.1);}
+
+/* ツールバー */
+.toolbar{background:#1a1814;color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.toolbar-title{font-size:13px;font-weight:500;}
+.toolbar-btns{display:flex;gap:8px;}
+.toolbar-btn{padding:6px 14px;font-size:11px;font-weight:500;border-radius:4px;cursor:pointer;font-family:inherit;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;transition:all .15s;}
+.toolbar-btn:hover{background:rgba(255,255,255,.1);}
+.toolbar-btn.primary{background:#2d5a3d;border-color:#2d5a3d;}
+.toolbar-btn.primary:hover{background:#1e4029;}
+
+/* 書類ヘッダー */
+.doc-title-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:3px;}
+.doc-title{font-size:18px;font-weight:500;letter-spacing:.3em;text-align:center;flex:1;}
+.doc-date{font-size:9px;white-space:nowrap;}
+.doc-note{font-size:8px;color:#444;line-height:1.6;margin-bottom:4px;text-align:right;}
+.name-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;justify-content:flex-end;}
+.name-label{font-size:9px;}
+.name-field{border-bottom:1px solid #000;min-width:120px;height:16px;font-size:10px;padding:0 4px;}
+
+/* グリッドレイアウト */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #000;}
+.grid-full{grid-column:1/-1;}
+.cell{border:1px solid #000;padding:3px 5px;min-height:20px;position:relative;}
+.cell-label{font-size:8px;font-weight:500;color:#333;margin-bottom:2px;line-height:1.4;}
+.cell-content{font-size:9px;line-height:1.6;min-height:14px;white-space:pre-wrap;word-break:break-all;}
+.cell-tall .cell-content{min-height:40px;}
+.cell-xtall .cell-content{min-height:70px;}
+
+/* 右側の関連項目 */
+.main-grid{display:grid;grid-template-columns:3fr 2fr;gap:0;width:100%;}
+.left-col{border-right:2px solid #000;}
+.right-col{}
+
+/* 内側グリッド */
+.inner-grid{display:grid;gap:0;}
+.ig-2col{grid-template-columns:1fr 1fr;}
+.ig-3col{grid-template-columns:1fr 1fr 1fr;}
+
+/* 略歴テーブル */
+.career-table{width:100%;border-collapse:collapse;}
+.career-table th{font-size:8px;font-weight:500;border:1px solid #000;padding:2px 4px;background:#f5f5f5;text-align:center;}
+.career-table td{font-size:9px;border:1px solid #000;padding:2px 4px;min-height:16px;vertical-align:top;}
+
+/* 取引先テーブル */
+.client-table{width:100%;border-collapse:collapse;font-size:8px;}
+.client-table th{border:1px solid #000;padding:2px 3px;background:#f5f5f5;text-align:center;white-space:nowrap;}
+.client-table td{border:1px solid #000;padding:2px 3px;min-height:16px;}
+
+/* 資金テーブル */
+.funds-table{width:100%;border-collapse:collapse;font-size:9px;}
+.funds-table th{border:1px solid #000;padding:2px 4px;background:#f5f5f5;text-align:center;}
+.funds-table td{border:1px solid #000;padding:2px 4px;min-height:16px;vertical-align:top;}
+
+/* 見通しテーブル */
+.forecast-table{width:100%;border-collapse:collapse;font-size:9px;}
+.forecast-table th{border:1px solid #000;padding:2px 4px;background:#f5f5f5;text-align:center;}
+.forecast-table td{border:1px solid #000;padding:2px 4px;min-height:16px;}
+
+.section-title-cell{background:#f0f0f0;font-size:9px;font-weight:500;padding:3px 5px;border:1px solid #000;}
+.filled{background:#fffef0;}
+
+/* 入力状態バッジ */
+.status-bar{display:flex;gap:8px;align-items:center;padding:8px 20px;background:#f2ede4;border-bottom:1px solid rgba(0,0,0,.1);margin-bottom:12px;}
+.status-item{display:flex;align-items:center;gap:4px;font-size:11px;color:#4a4640;}
+.status-dot{width:8px;height:8px;border-radius:50%;}
+.dot-done{background:#2d5a3d;}
+.dot-empty{background:#d0c8b8;}
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <div class="toolbar">
+    <div class="toolbar-title">創業計画書プレビュー｜印刷して公庫へ提出</div>
+    <div class="toolbar-btns">
+      <button class="toolbar-btn" onclick="window.close()">← 戻る</button>
+      <button class="toolbar-btn primary" onclick="window.print()">印刷 / PDF保存</button>
+    </div>
+  </div>
+  <div class="status-bar" id="status-bar"></div>
+</div>
+
+<div class="page">
+  <!-- タイトル行 -->
+  <div class="doc-title-row">
+    <div style="font-size:8px;width:200px;">
+      ☆ この書類は、ご面談にかかる時間を短縮するために利用させていただきます。<br>
+      　　なお、本書類はお返しできませんので、あらかじめご了承ください。<br>
+      ☆ お手数ですが、可能な範囲でご記入いただき、借入申込書に添えてご提出ください。
+    </div>
+    <div class="doc-title">創　業　計　画　書</div>
+    <div style="font-size:8px;text-align:right;width:200px;">
+      〔令和　　年　　月　　日作成〕<br><br>
+      お名前　<span id="field-name" style="border-bottom:1px solid #000;min-width:80px;display:inline-block;padding:0 4px;"></span>
+    </div>
+  </div>
+  <div style="font-size:8px;text-align:right;margin-bottom:4px;">☆ この書類に代えて、お客さまご自身が作成された計画書をご提出いただいても結構です。</div>
+
+  <!-- メインコンテンツ：左右2カラム -->
+  <div style="display:grid;grid-template-columns:55% 45%;gap:0;border:1.5px solid #000;">
+
+    <!-- 左カラム -->
+    <div style="border-right:1.5px solid #000;">
+
+      <!-- 1. 創業の動機 -->
+      <div class="section-title-cell">１　創業の動機（創業されるのは、どのような目的、動機からですか。）</div>
+      <div class="cell cell-xtall">
+        <div class="cell-content" id="field-motivation"></div>
+      </div>
+
+      <!-- 2. 経営者の略歴 -->
+      <div class="section-title-cell">２　経営者の略歴等（略歴については、勤務先名だけでなく、担当業務や役職、身につけた技能等についても記載してください。）</div>
+      <table class="career-table">
+        <tr>
+          <th style="width:60px;">年　月</th>
+          <th>内　容</th>
+        </tr>
+        <tr><td id="c1-date"></td><td id="c1-content"></td></tr>
+        <tr><td id="c2-date"></td><td id="c2-content"></td></tr>
+        <tr><td id="c3-date"></td><td id="c3-content"></td></tr>
+        <tr><td id="c4-date"></td><td id="c4-content"></td></tr>
+        <tr><td id="c5-date"></td><td id="c5-content"></td></tr>
+      </table>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #000;">
+        <div class="cell"><div class="cell-label">過去の事業経験</div><div class="cell-content" id="field-past-exp" style="font-size:8px;"></div></div>
+        <div class="cell"><div class="cell-label">取得資格</div><div class="cell-content" id="field-license" style="font-size:8px;"></div></div>
+        <div class="cell"><div class="cell-label">許認可・知的財産権等</div><div class="cell-content" style="font-size:8px;">特になし</div></div>
+      </div>
+
+      <!-- 3. 取扱商品・サービス -->
+      <div class="section-title-cell">３　取扱商品・サービス</div>
+      <div class="cell"><div class="cell-label">事業内容</div><div class="cell-content" id="field-business"></div></div>
+      <div class="cell cell-tall"><div class="cell-label">取扱商品・サービスの内容</div><div class="cell-content" id="field-service-detail"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;">
+        <div class="cell"><div class="cell-label">客単価・受注単価</div><div class="cell-content" id="field-price"></div></div>
+        <div class="cell"><div class="cell-label">営業日数・営業時間</div><div class="cell-content" id="field-hours"></div></div>
+      </div>
+      <div class="cell cell-tall"><div class="cell-label">セールスポイント（自社の強み）</div><div class="cell-content" id="field-strength"></div></div>
+      <div class="cell cell-tall"><div class="cell-label">販売ターゲット・販売戦略（集客方法）</div><div class="cell-content" id="field-target"></div></div>
+      <div class="cell cell-tall"><div class="cell-label">競合・市場など自社を取り巻く状況</div><div class="cell-content" id="field-market"></div></div>
+
+      <!-- 4. 従業員 -->
+      <div class="section-title-cell">４　従業員</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+        <div class="cell"><div class="cell-label">常勤役員の人数（法人のみ）</div><div class="cell-content" id="field-directors"></div></div>
+        <div class="cell"><div class="cell-label">従業員数（3ヵ月以上継続雇用予定）</div><div class="cell-content" id="field-employees"></div></div>
+        <div class="cell"><div class="cell-label">うち家族・パート従業員</div><div class="cell-content" id="field-part-emp"></div></div>
+      </div>
+
+      <!-- 5. 取引先・取引関係 -->
+      <div class="section-title-cell">５　取引先・取引関係等</div>
+      <table class="client-table">
+        <tr>
+          <th style="width:16px;"></th>
+          <th style="width:80px;">取引先名</th>
+          <th style="width:60px;">所在地</th>
+          <th style="width:30px;">シェア</th>
+          <th style="width:30px;">掛取引</th>
+          <th>回収・支払条件</th>
+        </tr>
+        <tr>
+          <td style="font-size:8px;text-align:center;">販<br>売<br>先</td>
+          <td id="client-sell-1"></td><td id="client-sell-1-loc"></td><td id="client-sell-1-share"></td><td></td><td id="client-sell-1-terms"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td id="client-sell-2"></td><td id="client-sell-2-loc"></td><td id="client-sell-2-share"></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td style="font-size:8px;text-align:center;">仕<br>入<br>先</td>
+          <td id="client-buy-1"></td><td id="client-buy-1-loc"></td><td></td><td></td><td id="client-buy-1-terms"></td>
+        </tr>
+        <tr>
+          <td style="font-size:8px;text-align:center;">外<br>注<br>先</td>
+          <td id="client-out-1"></td><td id="client-out-1-loc"></td><td></td><td></td><td></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 右カラム -->
+    <div>
+
+      <!-- 6. 関連企業 -->
+      <div class="section-title-cell">６　関連企業</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;">
+        <div class="cell"><div class="cell-label">関連企業①</div><div class="cell-content" id="field-related-1" style="font-size:8px;"></div></div>
+        <div class="cell"><div class="cell-label">関連企業②</div><div class="cell-content" id="field-related-2" style="font-size:8px;"></div></div>
+      </div>
+
+      <!-- 7. お借入の状況 -->
+      <div class="section-title-cell">７　お借入の状況</div>
+      <table class="client-table">
+        <tr>
+          <th style="width:80px;">お借入先名</th>
+          <th style="width:50px;">お使いみち</th>
+          <th style="width:40px;">お借入残高</th>
+          <th style="width:40px;">年間返済額</th>
+        </tr>
+        <tr><td id="debt-1-name"></td><td id="debt-1-use"></td><td id="debt-1-balance"></td><td id="debt-1-payment"></td></tr>
+        <tr><td id="debt-2-name"></td><td id="debt-2-use"></td><td id="debt-2-balance"></td><td id="debt-2-payment"></td></tr>
+        <tr><td id="debt-3-name"></td><td id="debt-3-use"></td><td id="debt-3-balance"></td><td id="debt-3-payment"></td></tr>
+      </table>
+
+      <!-- 8. 必要な資金と調達方法 -->
+      <div class="section-title-cell">８　必要な資金と調達方法</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #000;">
+        <div style="border-right:1px solid #000;padding:3px 5px;">
+          <div style="font-size:8px;font-weight:500;margin-bottom:2px;">必要な資金</div>
+          <table class="funds-table">
+            <tr><th>項目</th><th style="width:60px;">金額</th></tr>
+            <tr><td>設備資金（店舗・機械等）</td><td id="fund-equip"></td></tr>
+            <tr><td id="fund-equip-detail" style="font-size:8px;padding-left:8px;"></td><td></td></tr>
+            <tr><td>運転資金（仕入・経費等）</td><td id="fund-working"></td></tr>
+            <tr><td id="fund-working-detail" style="font-size:8px;padding-left:8px;"></td><td></td></tr>
+            <tr><th>合　計</th><td id="fund-total" style="font-weight:500;"></td></tr>
+          </table>
+        </div>
+        <div style="padding:3px 5px;">
+          <div style="font-size:8px;font-weight:500;margin-bottom:2px;">調達の方法</div>
+          <table class="funds-table">
+            <tr><th>項目</th><th style="width:60px;">金額</th></tr>
+            <tr><td>自己資金</td><td id="source-self"></td></tr>
+            <tr><td>親族・知人等からの借入</td><td id="source-family"></td></tr>
+            <tr><td>日本政策金融公庫からの借入</td><td id="source-koukou"></td></tr>
+            <tr><td>他の金融機関等からの借入</td><td id="source-other"></td></tr>
+            <tr><th>合　計</th><td id="source-total" style="font-weight:500;"></td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- 9. 事業の見通し -->
+      <div class="section-title-cell">９　事業の見通し（月平均）</div>
+      <table class="forecast-table">
+        <tr>
+          <th style="width:80px;">項目</th>
+          <th>創業当初</th>
+          <th>１年後（軌道後）</th>
+        </tr>
+        <tr><td>売上高①</td><td id="fc-sales-1"></td><td id="fc-sales-2"></td></tr>
+        <tr><td>売上原価②（仕入高）</td><td id="fc-cogs-1"></td><td id="fc-cogs-2"></td></tr>
+        <tr>
+          <td>経費③<br><span style="font-size:7px;">（人件費・家賃・支払利息・その他）</span></td>
+          <td id="fc-exp-1"></td><td id="fc-exp-2"></td>
+        </tr>
+        <tr><td style="font-weight:500;">利益①－②－③</td><td id="fc-profit-1" style="font-weight:500;"></td><td id="fc-profit-2" style="font-weight:500;"></td></tr>
+      </table>
+      <div class="cell cell-xtall" style="margin-top:0;">
+        <div class="cell-label">売上高・原価・経費の根拠</div>
+        <div class="cell-content" id="field-forecast-basis"></div>
+      </div>
+
+      <!-- 10. 自由記述 -->
+      <div class="section-title-cell">10　自由記述欄（アピールポイント、事業を行ううえでの悩み、希望するアドバイス等）</div>
+      <div class="cell cell-xtall">
+        <div class="cell-content" id="field-free"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="text-align:right;font-size:8px;margin-top:3px;">（日本政策金融公庫　国民生活事業）</div>
+</div>
+
+<script>
+function getAnswers(){
+  try{
+    const raw=localStorage.getItem('sougyou_answers');
+    return raw?JSON.parse(raw):{};
+  }catch(e){return{};}
+}
+
+function setText(id,text){
+  const el=document.getElementById(id);
+  if(el&&text)el.textContent=text;
+}
+
+function fillForm(answers){
+  // 1. 創業の動機
+  setText('field-motivation', answers.motivation||'');
+
+  // 2. 略歴 - 改行で分割して行に入れる
+  if(answers.career){
+    const lines=answers.career.split(/\n|。/).filter(l=>l.trim()).slice(0,5);
+    lines.forEach((line,i)=>{
+      const el=document.getElementById(`c${i+1}-content`);
+      if(el)el.textContent=line.trim();
+    });
+  }
+
+  // 略歴から資格を抽出
+  if(answers.career){
+    const licenseMatch=answers.career.match(/FP|ファイナンシャル|宅建|社労士|税理士|中小企業診断士|行政書士|資格[：:].+/);
+    if(licenseMatch) setText('field-license', licenseMatch[0]);
+  }
+
+  // 3. サービス
+  if(answers.service){
+    const lines=answers.service.split(/\n/).filter(l=>l.trim());
+    setText('field-business', lines[0]||answers.service.slice(0,50));
+    setText('field-service-detail', answers.service);
+
+    // セールスポイント・ターゲットを分離
+    const strengthMatch=answers.service.match(/強み[：:].+|セールスポイント[：:].+/);
+    const targetMatch=answers.service.match(/ターゲット[：:].+|対象[：:].+/);
+    if(strengthMatch) setText('field-strength', strengthMatch[0]);
+    if(targetMatch) setText('field-target', targetMatch[0]);
+    else setText('field-target', answers.service.slice(0,80));
+  }
+
+  // 4. 従業員
+  if(answers.employee){
+    const dirMatch=answers.employee.match(/役員\s*(\d+)/);
+    const empMatch=answers.employee.match(/従業員\s*(\d+)/);
+    const partMatch=answers.employee.match(/パート\s*(\d+)|家族\s*(\d+)/);
+    setText('field-directors', dirMatch?dirMatch[1]+'名':'—');
+    setText('field-employees', empMatch?empMatch[1]+'名':answers.employee.includes('1人')||answers.employee.includes('一人')?'0名（本人のみ）':'—');
+    setText('field-part-emp', partMatch?'あり':'なし');
+  }
+
+  // 5. 取引先
+  if(answers.clients){
+    const lines=answers.clients.split(/\n/).filter(l=>l.trim());
+    setText('client-sell-1', lines[0]||answers.clients.slice(0,30));
+    if(answers.clients.includes('仕入なし')||answers.clients.includes('仕入先なし')){
+      setText('client-buy-1','なし');
+    }
+  }
+
+  // 6. 関連企業
+  if(answers.related){
+    if(answers.related.includes('なし')||answers.related.includes('不要')){
+      setText('field-related-1','なし');
+    } else {
+      setText('field-related-1', answers.related.slice(0,40));
+    }
+  }
+
+  // 7. 借入
+  if(answers.debt){
+    if(answers.debt.includes('なし')||answers.debt.includes('ない')){
+      setText('debt-1-name','なし');
+    } else {
+      const lines=answers.debt.split(/\n/).filter(l=>l.trim());
+      lines.forEach((line,i)=>{
+        if(i>=3)return;
+        const nameEl=document.getElementById(`debt-${i+1}-name`);
+        if(nameEl)nameEl.textContent=line.trim();
+      });
+    }
+  }
+
+  // 8. 資金
+  if(answers.funds){
+    const equipMatch=answers.funds.match(/設備[^：:\d]*[：:]\s*([\d,]+)\s*万/);
+    const workMatch=answers.funds.match(/運転[^：:\d]*[：:]\s*([\d,]+)\s*万/);
+    const selfMatch=answers.funds.match(/自己資金[：:]\s*([\d,]+)\s*万|自己資金\s+([\d,]+)\s*万/);
+    const koukoMatch=answers.funds.match(/公庫[：:]\s*([\d,]+)\s*万|公庫.*([\d,]+)\s*万/);
+
+    if(equipMatch){setText('fund-equip', equipMatch[1]+'万円');}
+    if(workMatch){setText('fund-working', workMatch[1]+'万円');}
+    if(selfMatch){setText('source-self', (selfMatch[1]||selfMatch[2])+'万円');}
+    if(koukoMatch){setText('source-koukou', (koukoMatch[1]||koukoMatch[2])+'万円');}
+
+    // 合計
+    const allNums=answers.funds.match(/(\d+)\s*万/g);
+    if(allNums&&allNums.length>=2){
+      const nums=allNums.map(n=>parseInt(n));
+      const total=nums.reduce((a,b)=>a+b,0);
+      if(total>0){
+        setText('fund-total', total+'万円');
+        setText('source-total', total+'万円');
+      }
+    }
+  }
+
+  // 9. 事業の見通し
+  if(answers.forecast){
+    const sales1=answers.forecast.match(/創業当初.*?(\d+)\s*万|当初.*?(\d+)\s*万/);
+    const sales2=answers.forecast.match(/1年後.*?(\d+)\s*万|軌道.*?(\d+)\s*万/);
+    const exp1=answers.forecast.match(/経費.*?(\d+)\s*万|合計.*?(\d+)\s*万/);
+
+    if(sales1) setText('fc-sales-1', (sales1[1]||sales1[2])+'万円');
+    if(sales2) setText('fc-sales-2', (sales2[1]||sales2[2])+'万円');
+    if(exp1) setText('fc-exp-1', (exp1[1])+'万円');
+    setText('field-forecast-basis', answers.forecast);
+  }
+}
+
+function buildStatus(answers){
+  const sections=[
+    {id:'motivation',name:'創業の動機'},
+    {id:'career',name:'経営者の略歴'},
+    {id:'service',name:'取扱商品・サービス'},
+    {id:'employee',name:'従業員'},
+    {id:'clients',name:'取引先'},
+    {id:'related',name:'関連企業'},
+    {id:'debt',name:'借入状況'},
+    {id:'funds',name:'資金計画'},
+    {id:'forecast',name:'事業見通し'},
+  ];
+  const bar=document.getElementById('status-bar');
+  if(!bar)return;
+  const done=sections.filter(s=>answers[s.id]).length;
+  bar.innerHTML=`<span style="font-size:11px;font-weight:500;color:#1a1814;">${done}/9セクション入力済</span>`+
+    sections.map(s=>`<span class="status-item"><span class="status-dot ${answers[s.id]?'dot-done':'dot-empty'}"></span>${s.name}</span>`).join('');
+}
+
+// URLパラメータからも読み込める
+const urlParams=new URLSearchParams(window.location.search);
+const paramData=urlParams.get('data');
+
+let answers={};
+if(paramData){
+  try{answers=JSON.parse(decodeURIComponent(paramData));}catch(e){}
+}else{
+  answers=getAnswers();
+}
+
+fillForm(answers);
+buildStatus(answers);
+</script>
+</body>
+</html>
