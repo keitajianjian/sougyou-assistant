@@ -337,7 +337,23 @@ function showSummary(){
     </div>`;
 }
 function saveToStorage(){try{localStorage.setItem('sougyou_answers',JSON.stringify(answers));}catch(e){}}
-function openFormPreview(){saveToStorage();window.open('/keikakusho.html','_blank');}
+function openFormPreview(){
+  const a=answers;
+  const tmpl=document.getElementById('keikakusho-template').textContent;
+  const html=tmpl
+    .replace('{{motivation}}',a.motivation||'（未入力）')
+    .replace('{{career}}',a.career||'（未入力）')
+    .replace('{{service}}',a.service||'（未入力）')
+    .replace('{{employee}}',a.employee||'（未入力）')
+    .replace('{{clients}}',a.clients||'（未入力）')
+    .replace('{{related}}',a.related||'なし')
+    .replace('{{debt}}',a.debt||'なし')
+    .replace('{{funds}}',a.funds||'（未入力）')
+    .replace('{{forecast}}',a.forecast||'（未入力）');
+  const w=window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
+}
 function copyAll(){
   const text=SECTIONS.map(s=>`【${s.name}】\n${answers[s.id]||'（未入力）'}`).join('\n\n');
   navigator.clipboard.writeText(text).then(()=>alert('コピーしました。')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('コピーしました。');});
@@ -356,6 +372,29 @@ async function sendEmail(){
     else{alert('送信に失敗しました。テキストをコピーしてご利用ください。');closeEmailModal();copyAll();}
   }catch(e){alert('送信に失敗しました。テキストをコピーしてご利用ください。');closeEmailModal();copyAll();}
 }
+</script>
+  <script id="keikakusho-template" type="text/template">
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><title>創業計画書</title>
+<style>body{font-family:'Noto Sans JP',sans-serif;font-size:10px;padding:10mm;background:#fff;}
+.title{font-size:18px;font-weight:500;letter-spacing:.3em;text-align:center;margin-bottom:8px;}
+.section{margin-bottom:12px;border:1px solid #000;}
+.section-title{background:#f0f0f0;padding:4px 8px;font-weight:500;font-size:10px;border-bottom:1px solid #000;}
+.section-body{padding:6px 8px;font-size:11px;line-height:1.8;min-height:40px;white-space:pre-wrap;}
+.print-btn{position:fixed;top:10px;right:10px;padding:8px 16px;background:#2d5a3d;color:white;border:none;border-radius:4px;cursor:pointer;font-size:13px;}
+@media print{.print-btn{display:none;}}
+</style></head><body>
+<button class="print-btn" onclick="window.print()">印刷 / PDF保存</button>
+<div class="title">創　業　計　画　書</div>
+<div class="section"><div class="section-title">１　創業の動機</div><div class="section-body">{{motivation}}</div></div>
+<div class="section"><div class="section-title">２　経営者の略歴</div><div class="section-body">{{career}}</div></div>
+<div class="section"><div class="section-title">３　取扱商品・サービス</div><div class="section-body">{{service}}</div></div>
+<div class="section"><div class="section-title">４　従業員</div><div class="section-body">{{employee}}</div></div>
+<div class="section"><div class="section-title">５　取引先・取引関係</div><div class="section-body">{{clients}}</div></div>
+<div class="section"><div class="section-title">６　関連企業</div><div class="section-body">{{related}}</div></div>
+<div class="section"><div class="section-title">７　お借入の状況</div><div class="section-body">{{debt}}</div></div>
+<div class="section"><div class="section-title">８　必要な資金と調達方法</div><div class="section-body">{{funds}}</div></div>
+<div class="section"><div class="section-title">９　事業の見通し</div><div class="section-body">{{forecast}}</div></div>
+</body></html>
 </script>
 </body>
 </html>
